@@ -1,8 +1,9 @@
-package com.zzr.demo.modular.three;
+package com.zzr.demo.modular.one;
 
-import android.view.View;
+import com.zzr.demo.base.BasePresenter;
+import com.zzr.demo.base.BaseView;
 
-import com.zzr.demo.base.BaseFragment;
+import java.util.List;
 
 /**
  * _ooOoo_
@@ -35,28 +36,16 @@ import com.zzr.demo.base.BaseFragment;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/9/29.
+ * Created by zhangzhenrui on 16/10/12.
  * description
  */
 
-public class ThreeFragment extends BaseFragment {
-    @Override
-    public int onSetLayoutId() {
-        return 0;
+public interface ListContract {
+    interface view extends BaseView{
+        void setMDate(List<String> mData);
+        void onError(String msg);
     }
-
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void bindEvent() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
+    interface Presenter extends BasePresenter{
+        void getList();
     }
 }

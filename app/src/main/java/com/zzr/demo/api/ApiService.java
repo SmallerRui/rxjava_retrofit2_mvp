@@ -3,6 +3,7 @@ package com.zzr.demo.api;
 
 import com.zzr.demo.modular.login.LoginModel;
 import com.zzr.demo.modular.login.LoginParams;
+import com.zzr.demo.modular.one.ListModel;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -18,5 +19,7 @@ public interface ApiService {
      */
     @POST("login.php")
     Observable<LoginModel> login(@Body LoginParams mLoginParams);
+    @POST("data.php")
+    Observable<ListModel> getList();
 
 }

@@ -1,5 +1,9 @@
 package com.zzr.demo.modular.two;
 
+import android.view.View;
+
+import com.zzr.demo.base.BaseFragment;
+
 /**
  * _ooOoo_
  * o8888888o
@@ -35,5 +39,24 @@ package com.zzr.demo.modular.two;
  * description
  */
 
-public class TwoFragment {
+public class TwoFragment  extends BaseFragment{
+    @Override
+    public int onSetLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void bindEvent() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

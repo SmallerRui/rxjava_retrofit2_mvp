@@ -2,7 +2,6 @@ package com.zzr.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
@@ -11,7 +10,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.zzr.demo.base.BaseActivity;
+import com.zzr.demo.base.BaseFragment;
 import com.zzr.demo.modular.one.OneFragment;
+import com.zzr.demo.utils.FragmentFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @BindView(R.id.main_rg)
     RadioGroup mainRg;
     private SparseArray<Fragment> mainFragments;
+    private static String mCurrentFragmentTag;
+    private static BaseFragment mCurrentFragment;
+    private BaseFragment toFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +49,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         toolbar.setNavigationIcon(null);
         toolbar.inflateMenu(R.menu.main_menu);
         mainRg.setOnCheckedChangeListener(this);
-        try {
-            changeFragment(OneFragment.class.getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        FragmentManager fm=getSupportFragmentManager();
-//        FragmentTransaction ft=fm.beginTransaction();
-//        ft.replace(R.id.frame_content,new OneFragment());
-//        ft.commitAllowingStateLoss();
+        switchContent(OneFragment.class.getName());
     }
 
     @Override
@@ -66,27 +62,47 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     }
 
+
     /**
-     * 切换布局页面
+     * 切换Fragment
      *
-     * @param tag fragment对应的Tag标示（用Fragment的类名作为其Tag）
+     * @throws Exception
      */
-    private void changeFragment(String tag) throws Exception {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        Fragment fragment = manager.findFragmentByTag(tag);
-        if (fragment == null) {
-            fragment = (Fragment) Class.forName(tag).newInstance();
-            transaction.add(R.id.frame_content, fragment, tag);
+    public void switchContent(String tag) {
+        mCurrentFragmentTag = tag;
+        toFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(tag);
+        if (toFragment == null) {
+            toFragment = FragmentFactory.getFragmentByTag(tag);
+            if (toFragment == null) {
+                throw new NullPointerException("you should create a new Fragment by Tag" + tag);
+            }
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.frame_content, toFragment, tag);
+            if (mCurrentFragment != null) {
+                fragmentTransaction.hide(mCurrentFragment);
+            }
+            fragmentTransaction.commit();
+            mCurrentFragment = toFragment;
         } else {
-            transaction.show(fragment);
-        }
-        for (int i = 0; i < mainFragments.size(); i++) {
-            Fragment tempF = manager.findFragmentByTag(mainFragments.get(i).getClass().getName());
-            if (tempF != null && !tempF.getTag().equals(tag)) {
-                transaction.hide(tempF);
+            if (mCurrentFragment == toFragment) {
+                return;
+            }
+            if (!toFragment.isAdded()) {
+                FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+                if (mCurrentFragment != null) {
+                    fmt.hide(mCurrentFragment);
+                }
+                fmt.add(R.id.frame_content, toFragment, tag);
+                fmt.commit();
+                mCurrentFragment = toFragment;
+            } else {
+                FragmentTransaction fmt = getSupportFragmentManager().beginTransaction();
+                if (mCurrentFragment != null) {
+                    fmt.hide(mCurrentFragment);
+                }
+                fmt.show(toFragment).commit();
+                mCurrentFragment = toFragment;
             }
         }
-        transaction.commit();
     }
 }

@@ -1,8 +1,11 @@
-package com.zzr.demo.modular.three;
+package com.zzr.demo.modular.one;
 
-import android.view.View;
+import android.content.Context;
 
-import com.zzr.demo.base.BaseFragment;
+import com.zzr.demo.base.BaseRecylerAdapter;
+import com.zzr.demo.base.MyRecylerViewHolder;
+
+import java.util.List;
 
 /**
  * _ooOoo_
@@ -35,28 +38,17 @@ import com.zzr.demo.base.BaseFragment;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/9/29.
+ * Created by zhangzhenrui on 16/10/12.
  * description
  */
 
-public class ThreeFragment extends BaseFragment {
-    @Override
-    public int onSetLayoutId() {
-        return 0;
+public class ListAdapter extends BaseRecylerAdapter<String> {
+    public ListAdapter(Context context, List<String> mDatas, int layoutId) {
+        super(context, mDatas, layoutId);
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void bindEvent() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
+    public void convert(MyRecylerViewHolder holder, int position) {
+        holder.getTextView(android.R.id.text1).setText(mDatas.get(position));
     }
 }

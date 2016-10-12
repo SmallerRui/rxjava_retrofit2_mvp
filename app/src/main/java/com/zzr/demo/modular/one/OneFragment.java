@@ -1,5 +1,6 @@
 package com.zzr.demo.modular.one;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
@@ -7,15 +8,17 @@ import com.zzr.demo.R;
 import com.zzr.demo.R.layout;
 import com.zzr.demo.base.BaseFragment;
 
+import java.util.List;
+
 import butterknife.BindView;
 
 /**
- *       _ooOoo_
- *      o8888888o
- *      88" . "88
- *      (| -_- |)
- *       O\ = /O
- *   ____/`---'\____
+ * _ooOoo_
+ * o8888888o
+ * 88" . "88
+ * (| -_- |)
+ * O\ = /O
+ * ____/`---'\____
  * .   ' \\| |// `.
  * / \\||| : |||// \
  * / _||||| -:- |||||- \
@@ -44,9 +47,10 @@ import butterknife.BindView;
  * description
  */
 
-public class OneFragment extends BaseFragment {
+public class OneFragment extends BaseFragment<ListPresenter> implements ListContract.view {
     @BindView(R.id.fm_one_plv)
     PullToRefreshRecyclerView prv;
+    ListAdapter mAdapter;
 
     @Override
     public int onSetLayoutId() {
@@ -55,8 +59,11 @@ public class OneFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        presenter = new ListPresenter(this);
+        presenter.getList();
+        prv.setLayoutManager(new LinearLayoutManager(mContext));
     }
+
 
     @Override
     public void bindEvent() {
@@ -65,6 +72,21 @@ public class OneFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+    }
+
+    @Override
+    public void setMDate(List<String> mData) {
+        mAdapter = new ListAdapter(mContext, mData, android.R.layout.simple_list_item_1);
+        prv.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onError(String msg) {
+
+    }
+
+    @Override
+    public void hideLoading() {
 
     }
 }
