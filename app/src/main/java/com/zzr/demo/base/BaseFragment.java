@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.zzr.demo.api.ApiWrapper;
 import com.zzr.demo.api.PublicCallBack;
 
+import butterknife.ButterKnife;
 import rx.Subscriber;
 import rx.subscriptions.CompositeSubscription;
 
@@ -42,6 +43,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mContentView == null) {
             mContentView = inflater.inflate(onSetLayoutId(), container, false);
+            ButterKnife.bind(this, mContentView);
             initView();
             bindEvent();
         }

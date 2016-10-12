@@ -30,11 +30,11 @@ public class Api {
      * 服务器地址
      */
     // 请求公共部分
-    private static final String BASE_URL = "https://api.baobaobooks.com/";
+    private static final String BASE_URL = "http://192.168.0.129/Mytest/";
 
     // 消息头
-    private static final String HEADER_X_HB_Client_Type = "X-HB-Client-Type";
-    private static final String FROM_ANDROID = "ayb-android";
+    private static final String HEADER_X_HB_Client_Type = "Client-Type";
+    private static final String FROM_ANDROID = "android";
 
     private static ApiService service;
     private static Retrofit retrofit;
@@ -67,14 +67,12 @@ public class Api {
             //设置 请求的缓存
             File cacheFile = new File(BaseApplication.getInstance().getCacheDir(), "cache");
             Cache cache = new Cache(cacheFile, 1024 * 1024 * 50); //50Mb
-
             OkHttpClient client = new OkHttpClient.Builder()
                     .connectTimeout(15, TimeUnit.SECONDS)
                     .addInterceptor(interceptor)
                     .addInterceptor(mInterceptor)
                     .cache(cache)
                     .build();
-
             retrofit = new Retrofit.Builder()
                     .client(client)
                     .baseUrl(BASE_URL)

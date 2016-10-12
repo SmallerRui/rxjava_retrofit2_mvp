@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ZzrProject</string>
+    <string name="more">更多</string>
+    <string name="ok">确定</string>
 </resources>

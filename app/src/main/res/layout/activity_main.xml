@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <include layout="@layout/toolbar"></include>
+
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc"
+        />
+    <RadioGroup
+        android:id="@+id/main_rg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_one"
+            style="@style/radioButtonStyle"
+            android:text="one" />
+
+        <RadioButton
+            android:id="@+id/rb_two"
+            style="@style/radioButtonStyle"
+            android:text="two" />
+
+        <RadioButton
+            android:id="@+id/rb_three"
+            style="@style/radioButtonStyle"
+            android:text="three" />
+
+        <RadioButton
+            android:id="@+id/rb_four"
+            style="@style/radioButtonStyle"
+            android:text="four" />
+    </RadioGroup>
+</LinearLayout>

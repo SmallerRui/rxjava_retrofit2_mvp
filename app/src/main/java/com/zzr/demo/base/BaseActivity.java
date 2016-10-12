@@ -21,6 +21,7 @@ import com.zzr.demo.widgets.DialogLoading;
 
 import java.io.IOException;
 
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -95,6 +96,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         mContext = this;
         //Activity管理
         ActivityPageManager.getInstance().addActivity(this);
+
     }
 
     @Override
@@ -106,6 +108,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
+        ButterKnife.bind(this);
         mContentView = view;
         //初始化页面
         init();

@@ -80,7 +80,7 @@ public  class BaseCommonPresenter<T extends BaseView> {
                         }
                     }
                 }
-//                e.printStackTrace();
+               e.printStackTrace();
                 if (view != null) {
                     view.hideLoading();
                 }
