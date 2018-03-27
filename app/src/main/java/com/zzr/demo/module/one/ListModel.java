@@ -1,9 +1,4 @@
-package com.zzr.demo.modular.one;
-
-import android.content.Context;
-
-import com.zzr.demo.base.BaseRecylerAdapter;
-import com.zzr.demo.base.MyRecylerViewHolder;
+package com.zzr.demo.module.one;
 
 import java.util.List;
 
@@ -42,13 +37,23 @@ import java.util.List;
  * description
  */
 
-public class ListAdapter extends BaseRecylerAdapter<String> {
-    public ListAdapter(Context context, List<String> mDatas, int layoutId) {
-        super(context, mDatas, layoutId);
+public class ListModel {
+    private String state;
+    private List<String> data;
+
+    public String getState() {
+        return state;
     }
 
-    @Override
-    public void convert(MyRecylerViewHolder holder, int position) {
-        holder.getTextView(android.R.id.text1).setText(mDatas.get(position));
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public List<String> getData() {
+        return data;
+    }
+
+    public void setData(List<String> data) {
+        this.data = data;
     }
 }

@@ -1,9 +1,8 @@
-package com.zzr.demo.modular.one;
+package com.zzr.demo.module.four;
 
-import com.zzr.demo.api.PublicCallBack;
-import com.zzr.demo.base.BaseCommonPresenter;
+import android.view.View;
 
-import rx.Subscription;
+import com.zzr.demo.base.BaseFragment;
 
 /**
  * _ooOoo_
@@ -36,25 +35,28 @@ import rx.Subscription;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/10/12.
+ * Created by zhangzhenrui on 16/9/29.
  * description
  */
 
-public class ListPresenter extends BaseCommonPresenter<ListContract.view> implements ListContract.Presenter {
-
-    public ListPresenter(ListContract.view view) {
-        super(view);
+public class FourFragment extends BaseFragment {
+    @Override
+    public int onSetLayoutId() {
+        return 0;
     }
 
     @Override
-    public void getList() {
-        Subscription subscription = mApiWrapper.getList()
-                .subscribe(newMySubscriber(new PublicCallBack<ListModel>() {
-                    @Override
-                    public void onNext(ListModel listModel) {
-                        view.setMDate(listModel.getData());
-                    }
-                }));
-        mCompositeSubscription.add(subscription);
+    public void initView() {
+
+    }
+
+    @Override
+    public void bindEvent() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

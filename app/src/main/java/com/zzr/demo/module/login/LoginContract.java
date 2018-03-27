@@ -1,9 +1,7 @@
-package com.zzr.demo.modular.login;
+package com.zzr.demo.module.login;
 
-import com.zzr.demo.api.PublicCallBack;
-import com.zzr.demo.base.BaseCommonPresenter;
-
-import rx.Subscription;
+import com.zzr.demo.base.BasePresenter;
+import com.zzr.demo.base.BaseView;
 
 /**
  * _ooOoo_
@@ -40,23 +38,13 @@ import rx.Subscription;
  * description
  */
 
-public class LoginPresenter extends BaseCommonPresenter<LoginContract.View> implements LoginContract.Presenter {
-
-    public LoginPresenter(LoginContract.View view) {
-        super(view);
+public interface LoginContract {
+    interface View extends BaseView {
+        void loginSuccess();
+        void loginError(String msg);
     }
 
-    @Override
-    public void login(LoginParams params) {
-        Subscription subscription = mApiWrapper.login(params)
-                .subscribe(newMySubscriber(new PublicCallBack<LoginModel>() {
-
-                                               @Override
-                                               public void onNext(LoginModel loginModel) {
-                                                    view.loginSuccess();
-                                               }
-                                           }
-                ));
-        mCompositeSubscription.add(subscription);
+    interface Presenter extends BasePresenter {
+        void login(LoginParams params);
     }
 }

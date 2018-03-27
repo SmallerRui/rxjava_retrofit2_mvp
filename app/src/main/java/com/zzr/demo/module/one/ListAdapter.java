@@ -1,4 +1,11 @@
-package com.zzr.demo.modular.login;
+package com.zzr.demo.module.one;
+
+import android.content.Context;
+
+import com.zzr.demo.base.BaseRecylerAdapter;
+import com.zzr.demo.base.MyRecylerViewHolder;
+
+import java.util.List;
 
 /**
  * _ooOoo_
@@ -31,32 +38,17 @@ package com.zzr.demo.modular.login;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/9/30.
+ * Created by zhangzhenrui on 16/10/12.
  * description
  */
 
-public class LoginParams {
-    private String userName;
-    private String userPwd;
-
-    public LoginParams(String userName, String userPwd) {
-        this.userName = userName;
-        this.userPwd = userPwd;
+public class ListAdapter extends BaseRecylerAdapter<String> {
+    public ListAdapter(Context context, List<String> mDatas, int layoutId) {
+        super(context, mDatas, layoutId);
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    @Override
+    public void convert(MyRecylerViewHolder holder, int position) {
+        holder.getTextView(android.R.id.text1).setText(mDatas.get(position));
     }
 }

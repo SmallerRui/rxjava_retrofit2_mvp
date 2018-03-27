@@ -1,8 +1,4 @@
-package com.zzr.demo.modular.four;
-
-import android.view.View;
-
-import com.zzr.demo.base.BaseFragment;
+package com.zzr.demo.module.login;
 
 /**
  * _ooOoo_
@@ -35,28 +31,27 @@ import com.zzr.demo.base.BaseFragment;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/9/29.
+ * Created by zhangzhenrui on 16/9/30.
  * description
  */
 
-public class FourFragment extends BaseFragment {
-    @Override
-    public int onSetLayoutId() {
-        return 0;
+public class LoginModel {
+    private String state;
+    private String msg;
+
+    public String getState() {
+        return state;
     }
 
-    @Override
-    public void initView() {
-
+    public void setState(String state) {
+        this.state = state;
     }
 
-    @Override
-    public void bindEvent() {
-
+    public String getMsg() {
+        return msg;
     }
 
-    @Override
-    public void onClick(View v) {
-
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

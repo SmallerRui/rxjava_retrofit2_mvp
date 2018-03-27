@@ -1,9 +1,4 @@
-package com.zzr.demo.modular.one;
-
-import com.zzr.demo.base.BasePresenter;
-import com.zzr.demo.base.BaseView;
-
-import java.util.List;
+package com.zzr.demo.module.login;
 
 /**
  * _ooOoo_
@@ -36,16 +31,32 @@ import java.util.List;
  * 奔驰宝马贵者趣，公交自行程序员。
  * 别人笑我忒疯癫，我笑自己命太贱；
  * 不见满街漂亮妹，哪个归得程序员？
- * Created by zhangzhenrui on 16/10/12.
+ * Created by zhangzhenrui on 16/9/30.
  * description
  */
 
-public interface ListContract {
-    interface view extends BaseView{
-        void setMDate(List<String> mData);
-        void onError(String msg);
+public class LoginParams {
+    private String userName;
+    private String userPwd;
+
+    public LoginParams(String userName, String userPwd) {
+        this.userName = userName;
+        this.userPwd = userPwd;
     }
-    interface Presenter extends BasePresenter{
-        void getList();
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
     }
 }

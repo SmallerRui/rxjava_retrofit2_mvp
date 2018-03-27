@@ -1,14 +1,10 @@
 package com.zzr.demo.utils;
 
-import android.util.Log;
-
 import com.zzr.demo.base.BaseFragment;
-import com.zzr.demo.modular.four.FourFragment;
-import com.zzr.demo.modular.one.OneFragment;
-import com.zzr.demo.modular.three.ThreeFragment;
-import com.zzr.demo.modular.two.TwoFragment;
-
-import static android.R.attr.tag;
+import com.zzr.demo.module.four.FourFragment;
+import com.zzr.demo.module.one.OneFragment;
+import com.zzr.demo.module.three.ThreeFragment;
+import com.zzr.demo.module.two.TwoFragment;
 
 public class FragmentFactory {
 

@@ -11,13 +11,14 @@ import android.widget.TextView;
 
 import com.zzr.demo.base.BaseActivity;
 import com.zzr.demo.base.BaseFragment;
-import com.zzr.demo.modular.one.OneFragment;
+import com.zzr.demo.base.BasePresenter;
+import com.zzr.demo.module.one.OneFragment;
 import com.zzr.demo.utils.FragmentFactory;
+import com.zzr.demo.widgets.IMainView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity<IMainView, MainPresenter> implements IMainView, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -34,12 +35,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
     }
 
     @Override
     public void bindEvent() {
 
+    }
+
+    @Override
+    public MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 
 

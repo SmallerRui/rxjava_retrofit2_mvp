@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZzrProject.iml" filepath="$PROJECT_DIR$/ZzrProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxjava_retrofit2_mvp.iml" filepath="$PROJECT_DIR$/rxjava_retrofit2_mvp.iml" />
     </modules>
   </component>
 </project>

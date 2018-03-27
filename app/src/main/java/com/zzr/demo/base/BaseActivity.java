@@ -22,6 +22,7 @@ import com.zzr.demo.widgets.DialogLoading;
 import java.io.IOException;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import okhttp3.ResponseBody;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -61,7 +62,7 @@ import rx.subscriptions.CompositeSubscription;
  * //                  不见满街漂亮妹，哪个归得程序员？
  * activity 基类
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity<T, K extends BasePresenter<T>> extends AppCompatActivity implements View.OnClickListener {
     protected AppCompatActivity mContext;
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
@@ -85,8 +86,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected ApiWrapper mApiWrapper;
 
 
-    public T presenter;
+    public K presenter;
 
+    public Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +96,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         // 设置不能横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         mContext = this;
+        presenter = createPresenter();
         //Activity管理
         ActivityPageManager.getInstance().addActivity(this);
+        bind = ButterKnife.bind(this);
 
     }
 
@@ -158,16 +162,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      */
     public abstract void bindEvent();
 
-
-    /**
-     * 创建相应的 presenter
-     */
-    public void createPresenter(T presenter) {
-        if (presenter != null) {
-            this.presenter = presenter;
-        }
-
-    }
+    public abstract K createPresenter();
 
     protected void initFromWhere() {
         if (null != getIntent().getExtras()) {
@@ -185,11 +180,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      * 创建观察者  这里对观察着 过滤一次，过滤出我们想要的信息，错误的信息toast
      *
      * @param onNext
-     * @param <T>
+     * @param <K>
      * @return
      */
-    protected <T> Subscriber newMySubscriber(final PublicCallBack onNext) {
-        return new Subscriber<T>() {
+    protected <K> Subscriber newMySubscriber(final PublicCallBack onNext) {
+        return new Subscriber<K>() {
             @Override
             public void onCompleted() {
                 hideLoadingDialog();
@@ -222,7 +217,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
             }
 
             @Override
-            public void onNext(T t) {
+            public void onNext(K t) {
                 if (!mCompositeSubscription.isUnsubscribed()) {
                     onNext.onNext(t);
                 }
@@ -307,6 +302,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         //解绑 presenter
         if (presenter != null) {
             presenter.unsubscribe();
+        }
+        if (bind != null) {
+            bind.unbind();
         }
     }
 }

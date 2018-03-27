@@ -1,4 +1,4 @@
-package com.zzr.demo.modular.login;
+package com.zzr.demo.module.login;
 
 import android.os.Bundle;
 import android.text.TextUtils;

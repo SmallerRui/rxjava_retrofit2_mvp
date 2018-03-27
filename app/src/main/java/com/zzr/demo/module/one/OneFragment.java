@@ -1,8 +1,16 @@
-package com.zzr.demo.modular.two;
+package com.zzr.demo.module.one;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
+import com.zzr.demo.R;
+import com.zzr.demo.R.layout;
 import com.zzr.demo.base.BaseFragment;
+
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * _ooOoo_
@@ -39,16 +47,23 @@ import com.zzr.demo.base.BaseFragment;
  * description
  */
 
-public class TwoFragment  extends BaseFragment{
+public class OneFragment extends BaseFragment<ListPresenter> implements ListContract.view {
+    @BindView(R.id.fm_one_plv)
+    PullToRefreshRecyclerView prv;
+    ListAdapter mAdapter;
+
     @Override
     public int onSetLayoutId() {
-        return 0;
+        return layout.fm_one;
     }
 
     @Override
     public void initView() {
-
+        presenter = new ListPresenter(this);
+        presenter.getList();
+        prv.setLayoutManager(new LinearLayoutManager(mContext));
     }
+
 
     @Override
     public void bindEvent() {
@@ -57,6 +72,21 @@ public class TwoFragment  extends BaseFragment{
 
     @Override
     public void onClick(View v) {
+    }
+
+    @Override
+    public void setMDate(List<String> mData) {
+        mAdapter = new ListAdapter(mContext, mData, android.R.layout.simple_list_item_1);
+        prv.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onError(String msg) {
+
+    }
+
+    @Override
+    public void hideLoading() {
 
     }
 }
