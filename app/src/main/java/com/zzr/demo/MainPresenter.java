@@ -8,9 +8,5 @@ import com.zzr.demo.widgets.IMainView;
  */
 
 
-public class MainPresenter extends BasePresenter<IMainView> {
-    @Override
-    protected void unsubscribe() {
-        
-    }
+ class MainPresenter implements BasePresenter {
 }

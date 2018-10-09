@@ -59,8 +59,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-        presenter = new LoginPresenter(this);
+//        ButterKnife.bind(this);
+//        presenter = new LoginPresenter(this);
     }
 
     @Override
@@ -71,6 +71,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void bindEvent() {
 
+    }
+
+    @Override
+    public LoginPresenter createPresenter() {
+        if (presenter==null){
+            presenter=new LoginPresenter(this);
+        }
+        return presenter;
     }
 
     @Override

@@ -18,7 +18,7 @@ import com.zzr.demo.widgets.IMainView;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<IMainView, MainPresenter> implements IMainView, RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseActivity<MainPresenter> implements IMainView, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

@@ -54,9 +54,9 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public void onDestroy() {
         super.onDestroy();
         //解绑 presenter
-        if (presenter != null) {
-            presenter.unsubscribe();
-        }
+//        if (presenter != null) {
+//            presenter.unsubscribe();
+//        }
     }
 
     /**

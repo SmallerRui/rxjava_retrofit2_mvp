@@ -62,7 +62,7 @@ import rx.subscriptions.CompositeSubscription;
  * //                  不见满街漂亮妹，哪个归得程序员？
  * activity 基类
  */
-public abstract class BaseActivity<T, K extends BasePresenter<T>> extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity<K extends BasePresenter> extends AppCompatActivity implements View.OnClickListener {
     protected AppCompatActivity mContext;
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
@@ -99,7 +99,7 @@ public abstract class BaseActivity<T, K extends BasePresenter<T>> extends AppCom
         presenter = createPresenter();
         //Activity管理
         ActivityPageManager.getInstance().addActivity(this);
-        bind = ButterKnife.bind(this);
+
 
     }
 
@@ -112,7 +112,7 @@ public abstract class BaseActivity<T, K extends BasePresenter<T>> extends AppCom
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        ButterKnife.bind(this);
+        bind = ButterKnife.bind(this);
         mContentView = view;
         //初始化页面
         init();
@@ -300,9 +300,9 @@ public abstract class BaseActivity<T, K extends BasePresenter<T>> extends AppCom
             mCompositeSubscription.unsubscribe();
         }
         //解绑 presenter
-        if (presenter != null) {
-            presenter.unsubscribe();
-        }
+//        if (presenter != null) {
+//            presenter.unsubscribe();
+//        }
         if (bind != null) {
             bind.unbind();
         }
